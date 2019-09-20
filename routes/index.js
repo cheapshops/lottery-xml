@@ -3,6 +3,7 @@ var router = express.Router();
 
 var xml = require('./xml')
 var scrap = require('./scrap')
+var data = require('./data')
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
@@ -11,5 +12,6 @@ router.get('/', function(req, res, next) {
 
 router.use('/xml', xml);
 router.use('/scrap', scrap);
+router.use('/data', data);
 
 module.exports = router;
