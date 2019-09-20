@@ -1,5 +1,6 @@
 var express = require('express');
 var router = express.Router();
+const cron = require("node-cron");
 const model = require('../models/index');
 const service = require('../service')
 
@@ -54,7 +55,7 @@ function scrap_pages( urls, callback ){
   }
 }
 
-router.get('/', function(req, res, next) {
+function startScrapping(){
     let locations = {
         "AZ":"Arizona",
         "AR":"Arkansas",
@@ -119,7 +120,21 @@ router.get('/', function(req, res, next) {
     scrap_pages( urls, function(){
         console.log('All are done!!!');
     })
-    res.send(locations);
+}
+
+router.get('/', function(req, res, next) {
+    startScrapping()
+    res.send("scrapping starts!!");
+});
+
+cron.schedule("* */5 * * *", function() {
+
+    console.log('---------------------------------------')
+    console.log('---------------------------------------')
+    console.log("CRON runs to scrap data in every 5 mins");
+    console.log('---------------------------------------')
+    console.log('---------------------------------------')
+    startScrapping()
 });
 
 module.exports = router;
