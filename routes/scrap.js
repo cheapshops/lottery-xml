@@ -127,7 +127,7 @@ router.get('/', function(req, res, next) {
     res.send("scrapping starts!!");
 });
 
-cron.schedule("* */5 * * *", function() {
+cron.schedule("*/10 * * * *", function() {
 
     console.log('---------------------------------------')
     console.log('---------------------------------------')
