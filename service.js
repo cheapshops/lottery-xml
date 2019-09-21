@@ -1,5 +1,23 @@
 var request = require("request");
 var cheerio = require('cheerio');
+var csv = require('csvtojson')
+
+const csvFilePath="./game_ids.csv"
+
+const getGameIds = async function (){
+    var allGamesId = []
+    await csv()
+    .fromFile(csvFilePath)
+    .then((arr)=>{
+        for( var k in arr ){
+            var row = arr[k]
+            var kk = row['location'] +'_'+row['gamesName'];
+            kk = kk.toLowerCase()
+            allGamesId[kk] = row['gamesId']
+        }
+    })
+    return allGamesId
+}
 
 const getResultsByRequest = function( location, url, callback ){
     console.log('scraping URL --- ' + url)
@@ -13,8 +31,10 @@ const getResultsByRequest = function( location, url, callback ){
       // 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36'
     }
   };
-  request(options, function (error, response, body) {
+  request(options, async function (error, response, body) {
     if (!error) {
+        let arrGameIds = await getGameIds()
+
         let allResults = []
         jQuery = cheerio.load( body );
         console.log(jQuery('.js-results-container').length)
@@ -40,7 +60,16 @@ const getResultsByRequest = function( location, url, callback ){
                         })
                     }
                     let powerPlayText = jQuery(this).find('.result-content-wrap').find('.lottery-item-bonus').text() || ""
+
+                    //extract game id
+                    let keyy = location + '_' + gameName;
+
+                    keyy = keyy.toLowerCase()
+
+                    let gameId = arrGameIds[keyy] || ""
+
                     let res = {
+                        gameId: gameId,
                         location: location,
                         gameName: gameName,
                         dateText: dateText,
@@ -67,4 +96,5 @@ const getResultsByRequest = function( location, url, callback ){
 
 module.exports = {
   getResultsByRequest: getResultsByRequest,
+  getGameIds: getGameIds
 }

@@ -8,7 +8,7 @@ async function saveRecord(data,callback){
   if( data.length ==  0 ){
     callback('all data processed for DB insert/update .....');
   }else{
-    console.log( data.length);
+    // console.log( data.length);
     rec = data[0];
     data.splice(0, 1); //remove first product
     let checkExist = await model.Results.count({
@@ -16,7 +16,7 @@ async function saveRecord(data,callback){
         gameName: rec.gameName,
         dateText: rec.dateText
     })
-    console.log("checkExist record :: " + checkExist)
+    // console.log("checkExist record :: " + checkExist)
     if( checkExist == 0 ){
         console.log('-----NEW RECORD INSRTED----')
         console.log(rec)
