@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 var xml = require('xml');
 const model = require('../models/index');
-
+const service = require('../service')
 
 function get_game_xml(data){
     let game = [];
@@ -14,8 +14,10 @@ function get_game_xml(data){
     }})
 
     game.push({
-       lastdraw_date: data.dateText
+       lastdraw_date: data.dateText || ""
     })
+
+
 
     let lastdraw_numbers = "";
     if(data.jackpotResultBalls && data.jackpotResultBalls.length > 0 ){
@@ -34,11 +36,24 @@ function get_game_xml(data){
         })
     }
 
-    var jackpot = [ { _attr: { date: '' } }, '']
+    game.push({
+       nextdraw_date: data.dateText || ""
+    })
+
+    var jackpotAmount = data.jackpotAmount || ""
+
+    var jackpot = [
+        {
+            _attr: {
+                date: data.dateText || ""
+            }
+        }, jackpotAmount]
 
     game.push({
        jackpot: jackpot
     })
+
+    // console.log(game)
 
 
     return game
@@ -50,10 +65,37 @@ function get_game_xml(data){
 
 function get_state_xml(state, data ){
 
-    console.log(data.length)
-    console.log( state )
-    console.log('----')
+    // console.log(data.length)
+    // console.log( state )
+    // console.log('----')
 
+
+    var stateProv = []
+
+    stateProv.push({
+        _attr: {
+            stateprov_name: state,
+            stateprov_id: service.getLocationId(state),
+            country: "U.S.A"
+        }
+    })
+
+    data.map(function(game,key){
+        let gameXml = get_game_xml(game)
+        // if(stateProv.length < 5){
+            stateProv.push({
+                game:gameXml
+            })
+        // }
+    })
+
+    var stateXml = [
+        {
+            StateProv: stateProv
+        }
+    ];
+
+    return stateXml
 }
 
 router.get('/', function(req, res, next) {
@@ -79,14 +121,20 @@ router.get('/', function(req, res, next) {
             // })
         })
 
+        var aa = []
+
+        var stateXml = []
 
         for( var k in stateWiseData ){
-            $stateXml = get_state_xml(k, stateWiseData[k] )
+            stateXml = get_state_xml(k, stateWiseData[k] )
+
+            aa.push(stateXml)
+            // break
         }
 
         // console.log( stateWiseData)
         res.type('application/xml');
-        res.send(xml(xmlData));
+        res.send(xml(stateXml));
     }).sort({createdAt: -1}).limit(500)
 });
 

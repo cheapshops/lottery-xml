@@ -56,55 +56,7 @@ function scrap_pages( urls, callback ){
 }
 
 function startScrapping(){
-    let locations = {
-        "AZ":"Arizona",
-        "AR":"Arkansas",
-        "CA":"California",
-        "CO":"Colorado",
-        "CT":"Connecticut",
-        "DE":"Delaware",
-        "DC":"District Of Columbia",
-        "FL":"Florida",
-        "GA":"Georgia",
-        "ID":"Idaho",
-        "IL":"Illinois",
-        "IN":"Indiana",
-        "IA":"Iowa",
-        "KS":"Kansas",
-        "KY":"Kentucky",
-        "LA":"Louisiana",
-        "ME":"Maine",
-        "MD":"Maryland",
-        "MA":"Massachusetts",
-        "MI":"Michigan",
-        "MN":"Minnesota",
-        "MO":"Missouri",
-        "MT":"Montana",
-        "NE":"Nebraska",
-        "NH":"New Hampshire",
-        "NJ":"New Jersey",
-        "NM":"New Mexico",
-        "NY":"New York",
-        "NC":"North Carolina",
-        "ND":"North Dakota",
-        "OH":"Ohio",
-        "OK":"Oklahoma",
-        "OR":"Oregon",
-        "PA":"Pennsylvania",
-        "PR":"Puerto Rico",
-        "RI":"Rhode Island",
-        "SC":"South Carolina",
-        "SD":"South Dakota",
-        "TN":"Tennessee",
-        "TX":"Texas",
-        "VT":"Vermont",
-        "VI":"Virgin Islands",
-        "VA":"Virginia",
-        "WA":"Washington",
-        "WV":"West Virginia",
-        "WI":"Wisconsin",
-        "WY":"Wyoming"
-    }
+    let locations = service.getLocations()
     var baseUrl = "https://lottery.com/results/"
     var urls = []
     for( let code in locations ){
