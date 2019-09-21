@@ -1,0 +1,134 @@
+{
+  ".gitignore": {
+    "mt": "Thu Sep 19 2019 22:53:37 GMT+0530 (IST)",
+    "exists": true,
+    "state": 1,
+    "path": "/var/www/html/upwork/karnkapoor/lottery-xml/.gitignore"
+  },
+  "app.js": {
+    "mt": "Thu Sep 19 2019 23:18:05 GMT+0530 (IST)",
+    "exists": true,
+    "state": 1,
+    "path": "/var/www/html/upwork/karnkapoor/lottery-xml/app.js"
+  },
+  "bin/www": {
+    "mt": "Thu Sep 19 2019 22:43:25 GMT+0530 (IST)",
+    "exists": true,
+    "state": 1,
+    "path": "/var/www/html/upwork/karnkapoor/lottery-xml/bin/www"
+  },
+  "db.js": {
+    "mt": "Thu Sep 19 2019 23:10:36 GMT+0530 (IST)",
+    "exists": true,
+    "state": 1,
+    "path": "/var/www/html/upwork/karnkapoor/lottery-xml/db.js"
+  },
+  "game_ids.csv": {
+    "mt": "Sat Sep 21 2019 09:09:05 GMT+0530 (IST)",
+    "exists": true,
+    "state": 1,
+    "path": "/var/www/html/upwork/karnkapoor/lottery-xml/game_ids.csv"
+  },
+  "models/index.js": {
+    "mt": "Thu Sep 19 2019 23:04:09 GMT+0530 (IST)",
+    "exists": true,
+    "state": 1,
+    "path": "/var/www/html/upwork/karnkapoor/lottery-xml/models/index.js"
+  },
+  "models/results.js": {
+    "mt": "Fri Sep 20 2019 23:14:29 GMT+0530 (IST)",
+    "exists": true,
+    "state": 1,
+    "path": "/var/www/html/upwork/karnkapoor/lottery-xml/models/results.js"
+  },
+  "package-lock.json": {
+    "mt": "Sat Sep 21 2019 10:52:37 GMT+0530 (IST)",
+    "exists": true,
+    "state": 1,
+    "path": "/var/www/html/upwork/karnkapoor/lottery-xml/package-lock.json"
+  },
+  "package.json": {
+    "mt": "Sat Sep 21 2019 10:52:37 GMT+0530 (IST)",
+    "exists": true,
+    "state": 1,
+    "path": "/var/www/html/upwork/karnkapoor/lottery-xml/package.json"
+  },
+  "process.env": {
+    "mt": "Fri Sep 20 2019 23:21:21 GMT+0530 (IST)",
+    "exists": true,
+    "state": 1,
+    "path": "/var/www/html/upwork/karnkapoor/lottery-xml/process.env"
+  },
+  "public/images": {
+    "exists": true,
+    "is_dir": true,
+    "state": 1,
+    "path": "/var/www/html/upwork/karnkapoor/lottery-xml/public/images"
+  },
+  "public/javascripts": {
+    "exists": true,
+    "is_dir": true,
+    "state": 1,
+    "path": "/var/www/html/upwork/karnkapoor/lottery-xml/public/javascripts"
+  },
+  "public/stylesheets/style.css": {
+    "mt": "Thu Sep 19 2019 22:43:25 GMT+0530 (IST)",
+    "exists": true,
+    "state": 1,
+    "path": "/var/www/html/upwork/karnkapoor/lottery-xml/public/stylesheets/style.css"
+  },
+  "routes/data.js": {
+    "mt": "Sat Sep 21 2019 00:09:42 GMT+0530 (IST)",
+    "exists": true,
+    "state": 1,
+    "path": "/var/www/html/upwork/karnkapoor/lottery-xml/routes/data.js"
+  },
+  "routes/index.js": {
+    "mt": "Fri Sep 20 2019 23:58:52 GMT+0530 (IST)",
+    "exists": true,
+    "state": 1,
+    "path": "/var/www/html/upwork/karnkapoor/lottery-xml/routes/index.js"
+  },
+  "routes/scrap.js": {
+    "mt": "Sat Sep 21 2019 11:30:11 GMT+0530 (IST)",
+    "exists": true,
+    "state": 1,
+    "path": "/var/www/html/upwork/karnkapoor/lottery-xml/routes/scrap.js"
+  },
+  "routes/xml.js": {
+    "mt": "Sat Sep 21 2019 00:27:50 GMT+0530 (IST)",
+    "exists": true,
+    "state": 1,
+    "path": "/var/www/html/upwork/karnkapoor/lottery-xml/routes/xml.js"
+  },
+  "service.js": {
+    "mt": "Sat Sep 21 2019 11:25:47 GMT+0530 (IST)",
+    "exists": true,
+    "state": 1,
+    "path": "/var/www/html/upwork/karnkapoor/lottery-xml/service.js"
+  },
+  "views/error.jade": {
+    "mt": "Thu Sep 19 2019 22:43:25 GMT+0530 (IST)",
+    "exists": true,
+    "state": 1,
+    "path": "/var/www/html/upwork/karnkapoor/lottery-xml/views/error.jade"
+  },
+  "views/index.jade": {
+    "mt": "Thu Sep 19 2019 22:43:25 GMT+0530 (IST)",
+    "exists": true,
+    "state": 1,
+    "path": "/var/www/html/upwork/karnkapoor/lottery-xml/views/index.jade"
+  },
+  "views/layout.jade": {
+    "mt": "Thu Sep 19 2019 22:43:25 GMT+0530 (IST)",
+    "exists": true,
+    "state": 1,
+    "path": "/var/www/html/upwork/karnkapoor/lottery-xml/views/layout.jade"
+  },
+  "xmlstuff": {
+    "mt": "Sat Sep 21 2019 09:09:08 GMT+0530 (IST)",
+    "exists": true,
+    "state": 1,
+    "path": "/var/www/html/upwork/karnkapoor/lottery-xml/xmlstuff"
+  }
+}
