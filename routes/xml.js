@@ -10,7 +10,7 @@ function get_game_xml(data){
     game.push({ _attr: {
         gameId: data.gameId || "",
         game_name: data.gameName || "",
-        update_time: data.dateTime || "",
+        update_time: data.updatedAt || "",
     }})
 
     game.push({
@@ -82,20 +82,20 @@ function get_state_xml(state, data ){
 
     data.map(function(game,key){
         let gameXml = get_game_xml(game)
-        // if(stateProv.length < 5){
+        if(stateProv.length < 11){
             stateProv.push({
                 game:gameXml
             })
-        // }
+        }
     })
 
-    var stateXml = [
-        {
-            StateProv: stateProv
-        }
-    ];
+    // var stateXml = [
+    //     {
+    //         StateProv: stateProv
+    //     }
+    // ];
 
-    return stateXml
+    return stateProv
 }
 
 router.get('/', function(req, res, next) {
@@ -121,21 +121,28 @@ router.get('/', function(req, res, next) {
             // })
         })
 
-        var aa = []
+        var finalXML = []
+
+        // finalXML.push({
+        //     _attr: {
+        //         country: "U.S.A"
+        //     }
+        // })
 
         var stateXml = []
 
         for( var k in stateWiseData ){
             stateXml = get_state_xml(k, stateWiseData[k] )
-
-            aa.push(stateXml)
+            finalXML.push({
+                StateProv: stateXml
+            })
             // break
         }
-
-        // console.log( stateWiseData)
         res.type('application/xml');
-        res.send(xml(stateXml));
-    }).sort({createdAt: -1}).limit(500)
+        res.send(xml({
+            allgames: finalXML
+        }));
+    }).sort({updatedAt: -1}).limit(500)
 });
 
 module.exports = router;
