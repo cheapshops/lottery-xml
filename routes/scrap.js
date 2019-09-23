@@ -11,6 +11,7 @@ async function saveRecord(data,callback){
     // console.log( data.length);
     rec = data[0];
     data.splice(0, 1); //remove first product
+    console.log( rec )
     let checkExist = await model.Results.count({
         location: rec.location,
         gameName: rec.gameName,

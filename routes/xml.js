@@ -10,34 +10,19 @@ function get_game_xml(data){
     game.push({ _attr: {
         gameId: data.gameId || "",
         game_name: data.gameName || "",
-        update_time: data.updatedAt || "",
+        update_time: data.updateTime || "",
     }})
 
     game.push({
-       lastdraw_date: data.dateText || ""
+       lastdraw_date: data.lastdraw_date || ""
     })
 
-
-
-    let lastdraw_numbers = "";
-    if(data.jackpotResultBalls && data.jackpotResultBalls.length > 0 ){
-        lastdraw_numbers += data.jackpotResultBalls.join("-")
-    }
-    if( data.powerBall && data.powerBall != "" ){
-        lastdraw_numbers += ", Powerball: " + data.powerBall
-    }
-    if( data.powerPlayText && data.powerPlayText != "" ){
-        lastdraw_numbers += ", " + data.powerPlayText
-    }
-
-    if( lastdraw_numbers != "" ){
-        game.push({
-           lastdraw_number: lastdraw_numbers
-        })
-    }
+    game.push({
+       lastdraw_numbers: data.lastdraw_numbers || ""
+    })
 
     game.push({
-       nextdraw_date: data.dateText || ""
+       nextdraw_date: data.nextdraw_date || ""
     })
 
     var jackpotAmount = data.jackpotAmount || ""
@@ -45,13 +30,46 @@ function get_game_xml(data){
     var jackpot = [
         {
             _attr: {
-                date: data.dateText || ""
+                date: data.jackpotDate || ""
             }
         }, jackpotAmount]
 
     game.push({
        jackpot: jackpot
     })
+
+
+    // let lastdraw_numbers = "";
+    // if(data.jackpotResultBalls && data.jackpotResultBalls.length > 0 ){
+    //     lastdraw_numbers += data.jackpotResultBalls.join("-")
+    // }
+    // if( data.powerBall && data.powerBall != "" ){
+    //     lastdraw_numbers += ", Powerball: " + data.powerBall
+    // }
+    // if( data.powerPlayText && data.powerPlayText != "" ){
+    //     lastdraw_numbers += ", " + data.powerPlayText
+    // }
+
+    // if( lastdraw_numbers != "" ){
+    //     game.push({
+    //        lastdraw_number: lastdraw_numbers
+    //     })
+    // }
+
+
+
+    // var jackpotAmount = data.jackpotAmount || ""
+
+    // var jackpot = [
+    //     {
+    //         _attr: {
+    //             date: data.dateText || ""
+    //         }
+    //     }, jackpotAmount]
+
+    // game.push({
+    //    jackpot: jackpot
+    // })
 
     // console.log(game)
 
@@ -65,9 +83,105 @@ function get_game_xml(data){
 
 function get_state_xml(state, data ){
 
-    // console.log(data.length)
+    var groupGameWise = []
+
+    data.map(function(row,key){
+        let gameName = row.gameName
+        let chk = gameName
+        if( groupGameWise[chk] ){
+        } else {
+            groupGameWise[chk] = []
+        }
+        groupGameWise[chk].push( row )
+    })
+
+    let finalGames = []
+
+
+    for( var y in groupGameWise ){
+        let all = groupGameWise[y]
+
+        var YgameName = ""
+        var YgameId = ""
+        var YnextDrawDate = ""
+        var YlastDrawDate = ""
+        var YlastNumbers = ""
+        var YjackpotDate = ""
+        var YjackpotAmount = ""
+        var YupdateTime = ""
+
+
+        for( z in all ){
+            var game = all[z]
+
+            YgameName = game.gameName
+            YgameId = game.gameId
+
+            if(YupdateTime == ""){
+                YupdateTime = game.createdAt
+            }
+
+            if( game.jackpotResultBalls && game.jackpotResultBalls.length == 0 ){
+                YnextDrawDate = game.dateText
+                YjackpotDate = game.dateText
+                YjackpotAmount = game.jackpotAmount
+            }
+
+            if( YlastDrawDate == "" && game.jackpotResultBalls && game.jackpotResultBalls.length > 0 ){
+                YlastDrawDate = game.dateText
+                YlastNumbers += game.jackpotResultBalls.join("-")
+                if( game.powerBall && game.powerBall != "" ){
+                    YlastNumbers += ", Powerball: " + game.powerBall
+                }
+                if( game.powerPlayText && game.powerPlayText != "" ){
+                    YlastNumbers += ", " + game.powerPlayText
+                }
+            }
+        }
+
+
+
+        // console.log('------------------------')
+        // console.log('------------------------')
+        // console.log( groupGameWise[y])
+        // console.log('------------------------')
+        // console.log('------------------------')
+
+        var obj = {
+            gameName: YgameName,
+            gameId: YgameId,
+            lastdraw_date: YlastDrawDate,
+            lastdraw_numbers: YlastNumbers,
+            nextdraw_date: YnextDrawDate,
+            jackpotAmount: YjackpotAmount,
+            jackpotDate: YjackpotDate,
+            updateTime : YupdateTime
+        }
+
+        finalGames.push(obj)
+
+    }
+
+    // console.log(finalGames)
+
+
+    // groupGameWise.map(function(r,k){
+    //     console.log( r )
+    // })
+
+
+
+
+
+
+
+
+
+
     // console.log( state )
     // console.log('----')
+    // console.log( groupGameWise )
+    // console.log('**** ---- '+data.length)
 
 
     var stateProv = []
@@ -80,7 +194,7 @@ function get_state_xml(state, data ){
         }
     })
 
-    data.map(function(game,key){
+    finalGames.map(function(game,key){
         let gameXml = get_game_xml(game)
         if(stateProv.length < 11){
             stateProv.push({
@@ -88,6 +202,15 @@ function get_state_xml(state, data ){
             })
         }
     })
+
+    // data.map(function(game,key){
+    //     let gameXml = get_game_xml(game)
+    //     if(stateProv.length < 11){
+    //         stateProv.push({
+    //             game:gameXml
+    //         })
+    //     }
+    // })
 
     // var stateXml = [
     //     {
@@ -106,20 +229,27 @@ router.get('/', function(req, res, next) {
 
         results.map(function(data,key){
             let location = data.location
+            let gameName = data.gameName
 
-            if( stateWiseData[location] ){
+            let chk = location
+            // key = ""
+
+            if( stateWiseData[chk] ){
 
             } else {
-                stateWiseData[location] = []
+                stateWiseData[chk] = []
             }
 
-            stateWiseData[location].push( data )
+            stateWiseData[chk].push( data )
 
             // let game_xml = get_game_xml( data );
             // xmlData.push({
             //     game: game_xml
             // })
         })
+
+
+        // console.log( stateWiseData )
 
         var finalXML = []
 
@@ -142,7 +272,7 @@ router.get('/', function(req, res, next) {
         res.send(xml({
             allgames: finalXML
         }));
-    }).sort({updatedAt: -1}).limit(500)
+    }).sort({createdAt: 1}).limit(1000)
 });
 
 module.exports = router;
