@@ -8,7 +8,7 @@ function get_game_xml(data){
     let game = [];
 
     game.push({ _attr: {
-        gameId: data.gameId || "",
+        game_id: data.gameId || "",
         game_name: data.gameName || "",
         update_time: data.updateTime || "",
     }})
@@ -272,7 +272,7 @@ router.get('/', function(req, res, next) {
         res.send(xml({
             allgames: finalXML
         }));
-    }).sort({createdAt: 1}).limit(1000)
+    }).sort({createdAt: 1}).limit(5000)
 });
 
 module.exports = router;
