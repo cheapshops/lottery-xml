@@ -24,7 +24,7 @@
     "path": "/var/www/html/upwork/karnkapoor/lottery-xml/db.js"
   },
   "game_ids.csv": {
-    "mt": "Sat Sep 21 2019 09:09:05 GMT+0530 (IST)",
+    "mt": "Wed Sep 25 2019 21:46:28 GMT+0530 (IST)",
     "exists": true,
     "state": 1,
     "path": "/var/www/html/upwork/karnkapoor/lottery-xml/game_ids.csv"
@@ -96,7 +96,7 @@
     "path": "/var/www/html/upwork/karnkapoor/lottery-xml/routes/scrap.js"
   },
   "routes/xml.js": {
-    "mt": "Tue Sep 24 2019 21:26:34 GMT+0530 (IST)",
+    "mt": "Wed Sep 25 2019 21:46:01 GMT+0530 (IST)",
     "exists": true,
     "state": 1,
     "path": "/var/www/html/upwork/karnkapoor/lottery-xml/routes/xml.js"

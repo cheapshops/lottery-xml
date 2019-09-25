@@ -153,4 +153,44 @@ router.get('/', function(req, res, next) {
     }).sort({createdAt: 1}).limit(5000)
 });
 
+router.get('/search', function(req, res, next) {
+
+    let filter = {}
+    if( req.query && req.query.game && req.query.game != "" ){
+        filter = {
+            gameId: req.query.game
+        }
+    }
+
+    console.log( req)
+
+    model.Results.find(filter, function(err, results){
+        let xmlData = [];
+        let stateWiseData = [];
+        results.map(function(data,key){
+            let location = data.location
+            let gameName = data.gameName
+            let chk = location
+            if( stateWiseData[chk] ){
+
+            } else {
+                stateWiseData[chk] = []
+            }
+            stateWiseData[chk].push( data )
+        })
+        var finalXML = []
+        var stateXml = []
+        for( var k in stateWiseData ){
+            stateXml = get_state_xml(k, stateWiseData[k] )
+            finalXML.push({
+                StateProv: stateXml
+            })
+        }
+        res.type('application/xml');
+        res.send(xml({
+            allgames: finalXML
+        }));
+    }).sort({createdAt: 1}).limit(5000)
+});
+
 module.exports = router;
