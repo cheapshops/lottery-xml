@@ -51,6 +51,10 @@ function get_state_xml(state, data ){
         groupGameWise[chk].push( row )
     })
 
+    // if( state == 'Florida' ){
+    //     console.log(groupGameWise['Pick 2 Midday'])
+    // }
+
     let finalGames = []
 
     for( var y in groupGameWise ){
@@ -82,13 +86,13 @@ function get_state_xml(state, data ){
                 YjackpotAmount = game.jackpotAmount
             }
 
-            if( YlastDrawDate == "" && game.jackpotResultBalls && game.jackpotResultBalls.length > 0 ){
+            if( game.jackpotResultBalls && game.jackpotResultBalls.length > 0 ){
                 YlastDrawDate = game.dateText
-                YlastNumbers += game.jackpotResultBalls.join("-")
-                if( game.powerBall && game.powerBall != "" ){
+                YlastNumbers = game.jackpotResultBalls.join("-")
+                if( game.powerBall ){
                     YlastNumbers += ", Powerball: " + game.powerBall
                 }
-                if( game.powerPlayText && game.powerPlayText != "" ){
+                if( game.powerPlayText ){
                     YlastNumbers += ", " + game.powerPlayText
                 }
             }
@@ -140,6 +144,7 @@ router.get('/', function(req, res, next) {
             }
             stateWiseData[chk].push( data )
         })
+
         var finalXML = []
         var stateXml = []
         for( var k in stateWiseData ){
@@ -152,7 +157,7 @@ router.get('/', function(req, res, next) {
         res.send(xml({
             allgames: finalXML
         }));
-    }).sort({createdAt: 1}).limit(5000)
+    }).sort({dateTime: 1}).limit(5000)
 });
 /* start all xml*/
 

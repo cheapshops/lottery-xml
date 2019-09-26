@@ -11,18 +11,27 @@ async function saveRecord(data,callback){
     // console.log( data.length);
     rec = data[0];
     data.splice(0, 1); //remove first product
-    console.log( rec )
-    let checkExist = await model.Results.count({
+    let checkExist = await model.Results.findOne({
         location: rec.location,
         gameName: rec.gameName,
-        dateText: rec.dateText
+        dateText: rec.dateText,
     })
-    // console.log("checkExist record :: " + checkExist)
-    if( checkExist == 0 ){
+
+    console.log(rec)
+    if( checkExist ){
+        if( checkExist.jackpotResultBalls != rec.jackpotResultBalls ){
+            console.log('-----RECORD UPDATED----')
+            console.log(checkExist)
+            await model.Results.update({_id:checkExist._id}, {
+                $set: rec
+            })
+        }
+
+    } else {
         console.log('-----NEW RECORD INSRTED----')
-        console.log(rec)
         await model.Results.create(rec)
     }
+
     saveRecord(data, callback)
   }
 }
