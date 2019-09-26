@@ -1,9 +1,11 @@
 var express = require('express');
 var router = express.Router();
 var xml = require('xml');
+var moment = require('moment');
 const model = require('../models/index');
 const service = require('../service')
 
+/* start all xml*/
 function get_game_xml(data){
     let game = [];
     game.push({ _attr: {
@@ -152,45 +154,84 @@ router.get('/', function(req, res, next) {
         }));
     }).sort({createdAt: 1}).limit(5000)
 });
+/* start all xml*/
 
-router.get('/search', function(req, res, next) {
+/* search on gameid and location all xml*/
 
-    let filter = {}
-    if( req.query && req.query.game && req.query.game != "" ){
-        filter = {
-            gameId: req.query.game
+function get_draw_xml(data){
+    let draw = [];
+    let dateFormatted = new Date(data.dateTime);
+    draw.push({
+       draw_date: data.dateTime && moment(data.dateTime).format("ddd MM/DD/YY") || ""
+    })
+    let YlastNumbers = ""
+    if( data.jackpotResultBalls && data.jackpotResultBalls.length > 0 ){
+        YlastNumbers += data.jackpotResultBalls.join("-")
+        if( YlastNumbers != "" && data.powerBall && data.powerBall != "" ){
+            YlastNumbers += "-" + data.powerBall
         }
     }
+    draw.push({
+       drawing_results: YlastNumbers
+    })
+    return draw
+}
 
-    console.log( req)
-
-    model.Results.find(filter, function(err, results){
-        let xmlData = [];
-        let stateWiseData = [];
-        results.map(function(data,key){
-            let location = data.location
-            let gameName = data.gameName
-            let chk = location
-            if( stateWiseData[chk] ){
-
-            } else {
-                stateWiseData[chk] = []
-            }
-            stateWiseData[chk].push( data )
-        })
-        var finalXML = []
-        var stateXml = []
-        for( var k in stateWiseData ){
-            stateXml = get_state_xml(k, stateWiseData[k] )
-            finalXML.push({
-                StateProv: stateXml
-            })
-        }
+router.get('/search', function(req, res, next) {
+    let filter = {}
+    let gameId = ""
+    let location = "";
+    if( req.query && req.query.game && req.query.game != "" ){
+        gameId = req.query.game
+    }
+    if( req.query && req.query.location && req.query.location != "" ){
+        location = req.query.location
+    }
+    if( gameId == "" || location == "" ){
         res.type('application/xml');
         res.send(xml({
-            allgames: finalXML
+            REQUEST_RESULTS_BY_DATE: []
         }));
-    }).sort({createdAt: 1}).limit(5000)
+    } else {
+        let filter = {
+            gameId: gameId,
+            location: location,
+        }
+        model.Results.find(filter, function(err, results){
+            let xmlData = [];
+            let stateWiseData = [];
+            // console.log( results)
+            var finalXML = []
+            finalXML.push({
+                state: location
+            })
+            finalXML.push({
+                game: gameId
+            })
+            let draws = []
+            for(var k in results ){
+                let kk = results[k]
+                drawXml = get_draw_xml(kk)
+                if( kk.jackpotResultBalls && kk.jackpotResultBalls.length > 0 ){
+                    draws.push( {
+                        draw: drawXml
+                    })
+                }
+                if( draws.length >= 30 ){
+                    break;
+                }
+            }
+            finalXML.push({
+                draws: draws
+            })
+            res.type('application/xml');
+            res.send(xml({
+                REQUEST_RESULTS_BY_DATE: finalXML
+            }));
+        }).sort({dateTime: -1}).limit(1000)
+    }
 });
+
+/* search on gameid and location all xml*/
 
 module.exports = router;
