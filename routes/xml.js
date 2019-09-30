@@ -239,4 +239,162 @@ router.get('/search', function(req, res, next) {
 
 /* search on gameid and location all xml*/
 
+
+
+
+/* start xml smart pick */
+router.get('/smartpick', function(req, res, next) {
+    let filter = {}
+    let gameId = ""
+    let location = "";
+    if( req.query && req.query.game && req.query.game != "" ){
+        gameId = req.query.game
+    }
+    if( req.query && req.query.location && req.query.location != "" ){
+        location = req.query.location
+    }
+    if( gameId == "" || location == "" ){
+        res.type('application/xml');
+        res.send(xml({
+            REQUEST_SMART_PICK: []
+        }));
+    } else {
+        let filter = {
+            gameId: gameId,
+            location: location,
+        }
+
+        console.log(filter)
+        model.Results.find(filter, async function(err, results){
+        //     let xmlData = [];
+        //     let stateWiseData = [];
+        //     // console.log( results)
+
+
+            // console.log(allGamesId)
+            let gameName = await service.getGameName( gameId)
+
+            var finalXML = []
+            finalXML.push({
+                state: location
+            })
+            finalXML.push({
+                game: gameName
+            })
+            let startDate = ""
+            let endDate = ""
+
+            let jackpotNumberArr = []
+
+            let top_hot_numbersArr = []
+            let top_cold_numbersArr = []
+
+            if( results.length > 0 ){
+                for(var k in results){
+                    let kk = results[k]
+                    if( kk.dateTime ){
+                        if( endDate == ""){
+                            endDate = kk.dateTime
+                        }
+                        startDate = kk.dateTime
+                    }
+                    if(kk.jackpotResultBalls && kk.jackpotResultBalls.length > 0 ){
+                        jackpotNumberArr = jackpotNumberArr.concat(kk.jackpotResultBalls)
+                    }
+                    if(kk.powerBall && kk.powerBall != ""){
+                        jackpotNumberArr.push( kk.powerBall)
+                    }
+                    // console.log(kk)
+                }
+            }
+
+            if( jackpotNumberArr.length > 0 ){
+                let f = {};
+                for( var k in jackpotNumberArr ){
+                    var n = jackpotNumberArr[k]
+                    if( f[n] ){
+                        f[n] = f[n] + 1
+                    } else {
+                        f[n] = 1
+                    }
+                }
+                var sortable = [];
+                for (var v in f) {
+                    sortable.push([v, f[v]]);
+                }
+                sortable.sort(function(a, b) {
+                    return b[1] - a[1];
+                });
+                if( sortable.length > 0) {
+                    for( var k in sortable ){
+                        let chk = sortable[k]
+                        if( top_hot_numbersArr.length < 3 ){
+                            top_hot_numbersArr.push(chk[0])
+                        }
+                    }
+                    for(i = sortable.length - 1 ; i > 0; i--){
+                        let chk = sortable[i]
+                        if( top_cold_numbersArr.length < 3 && top_hot_numbersArr.indexOf(chk[0]) == -1 ){
+                            top_cold_numbersArr.push(chk[0])
+                        }
+                    }
+                }
+
+                console.log( top_hot_numbersArr)
+                console.log( top_cold_numbersArr)
+
+                // console.log(sortable[0])
+                // console.log(sortable[1])
+
+                // console.log(sortable)
+
+            }
+
+
+
+
+
+
+            finalXML.push({
+                start_date: startDate && moment(startDate).format("ddd MM/DD/YY") || ""
+            })
+
+
+            finalXML.push({
+                end_date: endDate && moment(endDate).format("ddd MM/DD/YY") || ""
+            })
+
+            finalXML.push({
+                top_hot_numbers: top_hot_numbersArr.toString()
+            })
+
+            finalXML.push({
+                top_cold_numbers: top_cold_numbersArr.toString()
+            })
+
+            console.log(results.length)
+        //     let draws = []
+        //     for(var k in results ){
+        //         let kk = results[k]
+        //         drawXml = get_draw_xml(kk)
+        //         if( kk.jackpotResultBalls && kk.jackpotResultBalls.length > 0 ){
+        //             draws.push( {
+        //                 draw: drawXml
+        //             })
+        //         }
+        //         if( draws.length >= 30 ){
+        //             break;
+        //         }
+        //     }
+        //     finalXML.push({
+        //         draws: draws
+        //     })
+            res.type('application/xml');
+            res.send(xml({
+                REQUEST_SMART_PICK: finalXML
+            }));
+        }).sort({dateTime: -1}).limit(1000)
+    }
+});
+
 module.exports = router;

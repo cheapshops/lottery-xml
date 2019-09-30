@@ -96,7 +96,7 @@ cron.schedule("*/10 * * * *", function() {
     console.log("CRON runs to scrap data in every 5 mins");
     console.log('---------------------------------------')
     console.log('---------------------------------------')
-    startScrapping()
+    // startScrapping()
 });
 
 module.exports = router;

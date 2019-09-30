@@ -157,10 +157,22 @@ const getLocationId = function(location){
     return ""
 }
 
+const getGameName = async function(gameid){
+    let allGamesId = await getGameIds()
+    for( var k in allGamesId){
+        if( allGamesId[k] == gameid ){
+            let chk = k.split('_')
+            return chk[1]
+        }
+    }
+    return ""
+}
+
 
 module.exports = {
     getLocations:getLocations,
     getLocationId:getLocationId,
     getResultsByRequest: getResultsByRequest,
-    getGameIds: getGameIds
+    getGameIds: getGameIds,
+    getGameName: getGameName
 }
