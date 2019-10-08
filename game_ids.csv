@@ -1,6 +1,6 @@
 gamesId,gamesName,location
-ad,da,ad
 113,MEGA Millions,Arizona
+AZ2,Fantasy 5,Arizona
 AZA,Pick 3,Arizona
 101,Powerball,Arizona
 AZ3,The Pick,Arizona
@@ -53,17 +53,25 @@ CTB,Play3 Night,Connecticut
 CTC,Play4 Day,Connecticut
 CTD,Play4 Night,Connecticut
 101,Powerball,Connecticut
-DCH,DC 2 Evening,DC
-DCG,DC 2 Midday,DC
-DCB,DC 3 Evening,DC
-DCA,DC 3 Midday,DC
-DCD,DC 4 Evening,DC
-DCC,DC 4 Midday,DC
-DCF,DC 5 Evening,DC
-DCE,DC 5 Midday,DC
-132,Lucky For Life,DC
-113,MEGA Millions,DC
-101,Powerball,DC
+DCH,DC 2 Evening,District of Columbia
+DCG,DC 2 Midday,District of Columbia
+DCB,DC 3 Evening,District of Columbia
+DCA,DC 3 Midday,District of Columbia
+DCD,DC 4 Evening,District of Columbia
+DCC,DC 4 Midday,District of Columbia
+DCF,DC 5 Evening,District of Columbia
+DCE,DC 5 Midday,District of Columbia
+DCH,DC-3 Midday,District of Columbia
+DCG,DC-2,District of Columbia
+DCB,DC-3 Evening,District of Columbia
+DCA,DC-3 Midday,District of Columbia
+DCD,DC-4 Evening,District of Columbia
+DCC,DC-4 Midday,District of Columbia
+DCF,DC-5 Evening,District of Columbia
+DCE,DC-5 Midday,District of Columbia
+132,Lucky For Life,District of Columbia
+113,MEGA Millions,District of Columbia
+101,Powerball,District of Columbia
 136,All Star Bonus,Delaware
 135,Lotto America,Delaware
 132,Lucky For Life,Delaware
@@ -76,6 +84,7 @@ DED,Play 4 Night,Delaware
 101,Powerball,Delaware
 134,Cash4Life,Florida
 FL3,Fantasy 5,Florida
+FL1,Florida Lotto,Florida
 FL1,Lotto,Florida
 FL0,Lotto XTRA,Florida
 FL5,Lucky Money,Florida
@@ -172,6 +181,7 @@ IE2,Lotto Plus 2,Ireland
 KSA,Pick 3 Evening,Kansas
 KSB,Pick 3 Midday,Kansas
 101,Powerball,Kansas
+KS3,Super Kansas Cash,Kansas
 KS3,Super Cash,Kansas
 KYF,5 Card Cash,Kentucky
 KY1,Cash Ball,Kentucky
@@ -269,6 +279,7 @@ NE1,Pick 5,Nebraska
 110,Pick 4 Evening,New Hampshire
 101,Powerball,New Hampshire
 NJ5,5 Card Cash,New Jersey
+NJ2,Jersey Cash 5 Xtra,New Jersey
 NJ2,Cash 5,New Jersey
 134,Cash4Life,New Jersey
 113,MEGA Millions,New Jersey
@@ -280,6 +291,7 @@ NJD,Pick 4 Evening,New Jersey
 NJDF,Pick 4 Evening FB,New Jersey
 NJC,Pick 4 Midday,New Jersey
 NJCF,Pick 4 Midday FB,New Jersey
+NJ1,Pick 6 Lotto Xtra,New Jersey
 NJ1,Pick 6 Lotto,New Jersey
 101,Powerball,New Jersey
 136,All Star Bonus,New Mexico
@@ -472,13 +484,13 @@ WA1,Lotto,Washington
 WA7,Match 4,Washington
 113,MEGA Millions,Washington
 101,Powerball,Washington
-136,All Star Bonus,West-Virginia
-WV1,Cash 25,West-Virginia
-WVA,Daily 3,West-Virginia
-WVC,Daily 4,West-Virginia
-135,Lotto America,West-Virginia
-113,MEGA Millions,West-Virginia
-101,Powerball,West-Virginia
+136,All Star Bonus,West Virginia
+WV1,Cash 25,West Virginia
+WVA,Daily 3,West Virginia
+WVC,Daily 4,West Virginia
+135,Lotto America,West Virginia
+113,MEGA Millions,West Virginia
+101,Powerball,West Virginia
 206,Daily Grand,Western Canada
 WC4,Extra,Western Canada
 205,Guaranteed Million Draw,Western Canada
@@ -504,19 +516,27 @@ WI1,Megabucks,Wisconsin
 WIA,Pick 3,Wisconsin
 WIC,Pick 4,Wisconsin
 101,Powerball,Wisconsin
+WI2,SuperCash!,Wisconsin
 WI2,Super Cash,Wisconsin
 WY1,Cowboy Draw,Wyoming
 132,Lucky For Life,Wyoming
 113,MEGA Millions,Wyoming
 101,Powerball,Wyoming
-DCH,DC 2 Evening,District Of Columbia
-DCG,DC 2 Midday,District Of Columbia
-DCB,DC 3 Evening,District Of Columbia
-DCA,DC 3 Midday,District Of Columbia
-DCD,DC 4 Evening,District Of Columbia
-DCC,DC 4 Midday,District Of Columbia
-DCF,DC 5 Evening,District Of Columbia
-DCE,DC 5 Midday,District Of Columbia
-132,Lucky For Life,District Of Columbia
-113,MEGA Millions,District Of Columbia
-101,Powerball,District Of Columbia
+101,Powerball,New York
+NY1,Lotto,New York
+134,Cash4Life,New York
+113,Mega Millions,New York
+NYA,Numbers Midday,New York
+NYC,Win 4 Midday,New York
+NYB,Numbers Evening,New York
+NYD,Win 4 Evening,New York
+NY3,Pick 10,New York
+NY2,Take 5,New York
+101,Powerball,North Carolina
+113,MEGA Millions,North Carolina
+132,Lucky For Life,North Carolina
+NC1,Cash 5,North Carolina
+NCD,Pick 4 Day,North Carolina
+NCC,Pick 4 Evening,North Carolina
+NCB,Pick 3 Day,North Carolina
+NCA,Pick 3 Evening,North Carolina
