@@ -1,3 +1,4 @@
 module.exports = {
-    Results: require('./results')
+    Results: require('./results'),
+    ResultsLotteryUsa: require('./resultsLotteryUsa')
 }

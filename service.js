@@ -93,6 +93,80 @@ const getResultsByRequest = function( location, url, callback ){
   });
 }
 
+const lotteryusa_getResultsByRequest = function( location, url, callback ){
+    console.log('scraping URL --- ' + url)
+  var options = {
+    url: url,
+    headers: {
+      // 'Content-Type': 'application/json',
+      // 'accept-encoding': 'gzip, deflate, br',
+      // 'accept-language': 'en-GB,en-US;q=0.9,en;q=0.8',
+      // 'cache-control': 'no-cache',
+      // 'User-Agent': 'Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/76.0.3809.100 Safari/537.36'
+    }
+  };
+  request(options, async function (error, response, body) {
+    if (!error) {
+        let arrGameIds = await getGameIds()
+        let allResults = []
+        jQuery = cheerio.load( body );
+        console.log(jQuery('.state-results').length)
+        if( jQuery('.state-results').find('tr').length > 0 ){
+          jQuery('.state-results').find('tr').each(function(){
+            let gameName = jQuery(this).find('.game').find('.game-title').text() || "";
+            let dateText = jQuery(this).find('.result').find('time').text() || "";
+            let dateTime = jQuery(this).find('.result').find('time').attr('datetime') || "";
+            let jackpotAmount = jQuery(this).find('.jackpot').find('.jackpot-amount').text() || "";
+            let jackpotLabel = ""
+            let powerPlayText = ""
+            let jackpotResultBalls = []
+            let powerBall = ""
+            if( jQuery(this).find('.result').find('.draw-result').find('li').length > 0 ){
+                jQuery(this).find('.result').find('.draw-result').find('li').each(function(){
+                    jQuery(this).find('span').remove()
+                    let ballNumber = jQuery(this).text() || "";
+                    let check = jQuery(this).attr('class')
+                    if( typeof check == 'undefined' ){
+                        jackpotResultBalls.push(ballNumber)
+                    } else {
+                        if( check == 'extra' ){
+                            powerPlayText = ballNumber
+                        } else {
+                            powerBall = ballNumber
+                        }
+                    }
+                })
+            }
+            // extract game id
+            let keyy = location + '_' + gameName;
+            keyy = keyy.toLowerCase()
+            let gameId = arrGameIds[keyy] || ""
+            // console.log('-------------------------------' + gameId)
+            if( gameName != "" ){
+                let res = {
+                    gameId: gameId,
+                    location: location,
+                    gameName: gameName.trim(),
+                    dateText: dateText.trim(),
+                    jackpotAmount: jackpotAmount.trim(),
+                    dateTime: dateTime,
+                    jackpotLabel: jackpotLabel,
+                    jackpotResultBalls: jackpotResultBalls,
+                    powerBall: powerBall.trim(),
+                    powerPlayText: powerPlayText.trim()
+                }
+                // console.log( res )
+                allResults.push(res)
+            }
+          })
+        }
+      callback('success',allResults);
+    } else {
+      callback('error', [])
+    }
+  });
+}
+
 const getLocations = function( ){
     let locations = {
         "AZ":"Arizona",
@@ -174,5 +248,7 @@ module.exports = {
     getLocationId:getLocationId,
     getResultsByRequest: getResultsByRequest,
     getGameIds: getGameIds,
-    getGameName: getGameName
+    getGameName: getGameName,
+
+    lotteryusa_getResultsByRequest: lotteryusa_getResultsByRequest
 }
