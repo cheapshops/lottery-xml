@@ -183,11 +183,11 @@ const lotteryusa_getResultsByRequest = function( location, url, callback ){
                             powerBall: "",
                             powerPlayText: ""
                         }
-                        console.log('arun next jackpot-----')
-                        console.log('arun next jackpot-----')
-                        console.log('arun next jackpot-----')
-                        console.log('arun next jackpot-----')
-                        console.log( res )
+                        // console.log('arun next jackpot-----')
+                        // console.log('arun next jackpot-----')
+                        // console.log('arun next jackpot-----')
+                        // console.log('arun next jackpot-----')
+                        // console.log( res )
                         allResults.push(res)
                     }
                 }
