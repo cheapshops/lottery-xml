@@ -7,6 +7,8 @@ const service = require('../../service')
 
 /* start all xml*/
 function get_game_xml(data){
+
+
     let game = [];
     game.push({ _attr: {
         game_id: data.gameId || "",
@@ -69,6 +71,17 @@ function get_state_xml(state, data ){
         var YjackpotAmount = ""
         var YupdateTime = ""
 
+        if( state == "Arizona"){
+
+        console.log('#############################')
+        console.log('#############################')
+        console.log('#############################')
+        console.log('#############################')
+        console.log('#############################')
+        console.log(all)
+
+    }
+
 
         for( z in all ){
             var game = all[z]
@@ -82,8 +95,7 @@ function get_state_xml(state, data ){
 
             if( game.jackpotResultBalls && game.jackpotResultBalls.length == 0 ){
                 YnextDrawDate = game.dateText
-                YjackpotDate = game.dateText
-                YjackpotAmount = game.jackpotAmount
+
             }
 
             if( game.jackpotResultBalls && game.jackpotResultBalls.length > 0 ){
@@ -95,6 +107,8 @@ function get_state_xml(state, data ){
                 if( game.powerPlayText ){
                     YlastNumbers += ", " + game.powerPlayText
                 }
+                YjackpotDate = game.dateText
+                YjackpotAmount = game.jackpotAmount
             }
         }
 

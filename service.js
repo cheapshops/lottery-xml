@@ -158,6 +158,41 @@ const lotteryusa_getResultsByRequest = function( location, url, callback ){
                 // console.log( res )
                 allResults.push(res)
             }
+
+            //if next-jackpot-amount is found then add anew game
+            if( jQuery(this).find('.next-jackpot') ){
+                if( jQuery(this).find('.next-jackpot').find('.next-jackpot-amount') ){
+                    if( jQuery(this).find('.next-jackpot').find('.next-draw-date') ){
+
+                        let nj_dateText = jQuery(this).find('.next-jackpot').find('.next-draw-date').text()
+
+                        jQuery(this).find('.next-jackpot').find('.next-draw-date').remove()
+                        jQuery(this).find('.next-jackpot').find('.label').remove()
+                        jQuery(this).find('.next-jackpot').find('a').remove()
+
+                        let nj_jackpotAmount = jQuery(this).find('.next-jackpot').find('.next-jackpot-amount').text()
+                        let res = {
+                            gameId: gameId,
+                            location: location,
+                            gameName: gameName.trim(),
+                            dateText: nj_dateText.trim(),
+                            jackpotAmount: nj_jackpotAmount.trim(),
+                            dateTime: nj_dateText.trim(),
+                            jackpotLabel: "",
+                            jackpotResultBalls: [],
+                            powerBall: "",
+                            powerPlayText: ""
+                        }
+                        console.log('arun next jackpot-----')
+                        console.log('arun next jackpot-----')
+                        console.log('arun next jackpot-----')
+                        console.log('arun next jackpot-----')
+                        console.log( res )
+                        allResults.push(res)
+                    }
+                }
+            }
+
           })
         }
       callback('success',allResults);
