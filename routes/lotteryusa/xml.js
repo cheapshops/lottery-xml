@@ -71,16 +71,16 @@ function get_state_xml(state, data ){
         var YjackpotAmount = ""
         var YupdateTime = ""
 
-        if( state == "Arizona"){
+    //     if( state == "Arizona"){
 
-        console.log('#############################')
-        console.log('#############################')
-        console.log('#############################')
-        console.log('#############################')
-        console.log('#############################')
-        console.log(all)
+    //     console.log('#############################')
+    //     console.log('#############################')
+    //     console.log('#############################')
+    //     console.log('#############################')
+    //     console.log('#############################')
+    //     console.log(all)
 
-    }
+    // }
 
 
         for( z in all ){
