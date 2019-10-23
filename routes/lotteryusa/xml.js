@@ -144,7 +144,7 @@ function get_state_xml(state, data ){
 }
 
 router.get('/', function(req, res, next) {
-    model.ResultsLotteryUsa.find(function(err, results){
+    model.ResultsLotteryUsa.find({gameId:{$ne:""}},function(err, results){
         let xmlData = [];
         let stateWiseData = [];
         results.map(function(data,key){

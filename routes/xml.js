@@ -130,7 +130,7 @@ function get_state_xml(state, data ){
 }
 
 router.get('/', function(req, res, next) {
-    model.Results.find(function(err, results){
+    model.Results.find({gameId:{$ne:""}},function(err, results){
         let xmlData = [];
         let stateWiseData = [];
         results.map(function(data,key){
