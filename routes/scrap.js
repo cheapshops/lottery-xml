@@ -11,25 +11,29 @@ async function saveRecord(data,callback){
     // console.log( data.length);
     rec = data[0];
     data.splice(0, 1); //remove first product
-    let checkExist = await model.Results.findOne({
-        location: rec.location,
-        gameName: rec.gameName,
-        dateText: rec.dateText,
-    })
 
-    console.log(rec)
-    if( checkExist ){
-        if( checkExist.jackpotResultBalls != rec.jackpotResultBalls ){
-            console.log('-----RECORD UPDATED----')
-            console.log(checkExist)
-            await model.Results.update({_id:checkExist._id}, {
-                $set: rec
-            })
+    if( rec.location != "" && rec.gameName != "" && rec.dateText != "" ){
+
+        let checkExist = await model.Results.findOne({
+            location: rec.location,
+            gameName: rec.gameName,
+            dateText: rec.dateText,
+        })
+
+        console.log(rec)
+        if( checkExist ){
+            if( checkExist.jackpotResultBalls != rec.jackpotResultBalls ){
+                console.log('-----lottery RECORD UPDATED----')
+                console.log(checkExist)
+                await model.Results.update({_id:checkExist._id}, {
+                    $set: rec
+                })
+            }
+
+        } else {
+            console.log('-----lottery NEW RECORD INSRTED----')
+            await model.Results.create(rec)
         }
-
-    } else {
-        console.log('-----NEW RECORD INSRTED----')
-        await model.Results.create(rec)
     }
 
     saveRecord(data, callback)
@@ -89,7 +93,7 @@ router.get('/', function(req, res, next) {
     res.send("scrapping starts!!");
 });
 
-cron.schedule("*/10 * * * *", function() {
+cron.schedule("*/20 * * * *", function() {
 
     console.log('---------------------------------------')
     console.log('---------------------------------------')

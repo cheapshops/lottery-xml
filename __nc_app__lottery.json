@@ -108,25 +108,25 @@
     "path": "/var/www/html/upwork/karnkapoor/lottery-xml/routes/lotteryusa/index.js"
   },
   "routes/lotteryusa/scrap.js": {
-    "mt": "Mon Oct 21 2019 14:40:54 GMT+0530 (IST)",
+    "mt": "Fri Nov 01 2019 22:30:54 GMT+0530 (IST)",
     "exists": true,
     "state": 1,
     "path": "/var/www/html/upwork/karnkapoor/lottery-xml/routes/lotteryusa/scrap.js"
   },
   "routes/lotteryusa/xml.js": {
-    "mt": "Mon Oct 21 2019 16:56:37 GMT+0530 (IST)",
+    "mt": "Fri Nov 01 2019 22:40:06 GMT+0530 (IST)",
     "exists": true,
     "state": 1,
     "path": "/var/www/html/upwork/karnkapoor/lottery-xml/routes/lotteryusa/xml.js"
   },
   "routes/scrap.js": {
-    "mt": "Mon Oct 21 2019 14:40:51 GMT+0530 (IST)",
+    "mt": "Fri Nov 01 2019 22:30:40 GMT+0530 (IST)",
     "exists": true,
     "state": 1,
     "path": "/var/www/html/upwork/karnkapoor/lottery-xml/routes/scrap.js"
   },
   "routes/xml.js": {
-    "mt": "Tue Oct 01 2019 08:19:29 GMT+0530 (IST)",
+    "mt": "Fri Nov 01 2019 21:35:13 GMT+0530 (IST)",
     "exists": true,
     "state": 1,
     "path": "/var/www/html/upwork/karnkapoor/lottery-xml/routes/xml.js"

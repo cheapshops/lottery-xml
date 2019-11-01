@@ -147,6 +147,12 @@ router.get('/', function(req, res, next) {
     model.ResultsLotteryUsa.find({gameId:{$ne:""}},function(err, results){
         let xmlData = [];
         let stateWiseData = [];
+
+        console.log('*******')
+        console.log('*******')
+        console.log('*******')
+        console.log(err)
+
         results.map(function(data,key){
             let location = data.location
             let gameName = data.gameName
@@ -171,7 +177,7 @@ router.get('/', function(req, res, next) {
         res.send(xml({
             allgames: finalXML
         }));
-    }).sort({dateTime: 1}).limit(5000)
+    }).sort({dateTime: 1}).limit(50000)
 });
 /* start all xml*/
 

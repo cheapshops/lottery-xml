@@ -157,7 +157,7 @@ router.get('/', function(req, res, next) {
         res.send(xml({
             allgames: finalXML
         }));
-    }).sort({dateTime: 1}).limit(5000)
+    }).sort({dateTime: 1}).limit(50000)
 });
 /* start all xml*/
 
